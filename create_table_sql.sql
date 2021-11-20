@@ -1,6 +1,6 @@
 CREATE TABLE old_price (
   model_name VARCHAR(20),
-  measurement_time TIMESTAMP,
+  measurement_time DATE,
   price INT UNSIGNED NOT NULL,
   PRIMARY KEY (model_name, measurement_time),
   FOREIGN KEY (model_name) REFERENCES goods(model_name)
@@ -32,8 +32,8 @@ CREATE TABLE goods (
   model_name VARCHAR(20) PRIMARY KEY,
   category VARCHAR (15) NOT NULL,
   manufacturer VARCHAR(15) NOT NULL,
-  release_date TIMESTAMP,
-  product_weight INT UNSIGNED NOT NULL,
+  release_date DATE,
+  product_weight DECIMAL(2,1) UNSIGNED NOT NULL,
   price INT UNSIGNED NOT NULL
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE sells (
 
 CREATE TABLE old_price (
   model_name VARCHAR(20),
-  measurement_date TIMESTAMP,
+  measurement_date DATE,
   price INT UNSIGNED NOT NULL,
   PRIMARY KEY (model_name, measurement_date),
   FOREIGN KEY (model_name) REFERENCES goods(model_name)
@@ -73,9 +73,9 @@ CREATE TABLE account (
 CREATE TABLE customer (
   c_id VARCHAR(12) PRIMARY KEY,
   a_id VARCHAR(12) NOT NULL,
-  sign_up_date TIMESTAMP NOT NULL,
+  sign_up_date DATE NOT NULL,
   c_name VARCHAR(20) NOT NULL,
-  date_of_birth TIMESTAMP NOT NULL,
+  date_of_birth DATE NOT NULL,
   gender VARCHAR(10) NOT NULL,
   nickname VARCHAR(12) NOT NULL UNIQUE,
   c_address VARCHAR(45) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE buys(
   shopping_mall_domain VARCHAR(20),
   store_name VARCHAR(20),
   model_name VARCHAR(20),
-  buy_date TIMESTAMP NOT NULL,
+  buy_date DATE NOT NULL,
   quantity INT UNSIGNED NOT NULL,
   PRIMARY KEY (
     c_id,
@@ -105,7 +105,7 @@ CREATE TABLE review (
   shopping_mall_domain VARCHAR(20),
   store_name VARCHAR(20),
   model_name VARCHAR(20),
-  registeration_time TIMESTAMP,
+  registeration_time DATE,
   contents VARCHAR(100) NOT NULL,
   rating DECIMAL(2, 1) NOT NULL,
   PRIMARY KEY(
@@ -131,7 +131,7 @@ CREATE TABLE review (
 CREATE TABLE window_shopping (
   c_id VARCHAR(12),
   model_name VARCHAR(20),
-  last_seen_date TIMESTAMP,
+  last_seen_date DATE,
   seen_count INT UNSIGNED NOT NULL,
   PRIMARY KEY (c_id, model_name),
   FOREIGN KEY (c_id) REFERENCES customer(c_id),
