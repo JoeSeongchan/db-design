@@ -58,7 +58,7 @@ CREATE TABLE laptop (
   color VARCHAR(10) NOT NULL,
   screen_size_inch DECIMAL(3, 1) NOT NULL,
   processor_brand VARCHAR(10) NOT NULL,
-  processor_count TINYINT(2) NOT NULL,
+  core_count TINYINT(2) NOT NULL,
   hard_drive_size INT UNSIGNED NOT NULL,
   ram_size INT UNSIGNED NOT NULL,
   PRIMARY KEY (model_name),
@@ -107,6 +107,7 @@ CREATE TABLE review (
   model_name VARCHAR(20),
   registeration_time TIMESTAMP,
   contents VARCHAR(100) NOT NULL,
+  rating DECIMAL(2, 1) NOT NULL,
   PRIMARY KEY(
     c_id,
     shopping_mall_domain,
@@ -138,7 +139,12 @@ CREATE TABLE window_shopping (
 );
 
 INSERT INTO
-  window_shopping(c_id, model_name, last_seen_date, seen_count)
+  laptop(
+    model_name,
+    model_name,
+    last_seen_date,
+    seen_count
+  )
 VALUES
   ('0001', NULL, NOW(), 10);
 
@@ -147,3 +153,26 @@ SET
 
 SET
   FOREIGN_KEY_CHECKS = 1;
+
+INSERT INTO
+  laptop (
+    model_name,
+    operating_system,
+    color,
+    screen_size_inch,
+    processor_brand,
+    core_count,
+    hard_drive_size,
+    ram_size
+  )
+VALUES
+  (
+    'NT350XCR-AD5WS',
+    'Freedos',
+    'White',
+    15.6,
+    'Intel',
+    4,
+    256,
+    8
+  );
