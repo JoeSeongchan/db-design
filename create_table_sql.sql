@@ -1,13 +1,5 @@
-CREATE TABLE old_price (
-  model_name VARCHAR(20),
-  measurement_time DATE,
-  price INT UNSIGNED NOT NULL,
-  PRIMARY KEY (model_name, measurement_time),
-  FOREIGN KEY (model_name) REFERENCES goods(model_name)
-);
-
 CREATE TABLE seller (
-  business_number CHAR(10) PRIMARY KEY,
+  seller_business_number CHAR(10) PRIMARY KEY,
   business_name VARCHAR(15) NOT NULL UNIQUE,
   representative_name VARCHAR(15) NOT NULL,
   email VARCHAR(30) NOT NULL,
@@ -15,7 +7,7 @@ CREATE TABLE seller (
 );
 
 CREATE TABLE shopping_mall (
-  domain VARCHAR(20) PRIMARY KEY,
+  shopping_mall_domain VARCHAR(20) PRIMARY KEY,
   shopping_mall_name VARCHAR(15) NOT NULL UNIQUE
 );
 
@@ -24,8 +16,8 @@ CREATE TABLE store (
   store_name VARCHAR(20),
   seller_business_number CHAR(10),
   PRIMARY KEY (shopping_mall_domain, store_name),
-  FOREIGN KEY (shopping_mall_domain) REFERENCES shopping_mall (domain),
-  FOREIGN KEY (seller_business_number) REFERENCES seller(business_number)
+  FOREIGN KEY (shopping_mall_domain) REFERENCES shopping_mall (shopping_mall_domain),
+  FOREIGN KEY (seller_business_number) REFERENCES seller(seller_business_number)
 );
 
 CREATE TABLE goods (
@@ -33,7 +25,7 @@ CREATE TABLE goods (
   category VARCHAR (15) NOT NULL,
   manufacturer VARCHAR(15) NOT NULL,
   release_date DATE,
-  product_weight DECIMAL(2,1) UNSIGNED NOT NULL,
+  product_weight DECIMAL(2, 1) UNSIGNED NOT NULL,
   price INT UNSIGNED NOT NULL
 );
 
@@ -137,42 +129,3 @@ CREATE TABLE window_shopping (
   FOREIGN KEY (c_id) REFERENCES customer(c_id),
   FOREIGN KEY (model_name) REFERENCES goods(model_name)
 );
-
-INSERT INTO
-  laptop(
-    model_name,
-    model_name,
-    last_seen_date,
-    seen_count
-  )
-VALUES
-  ('0001', NULL, NOW(), 10);
-
-SET
-  FOREIGN_KEY_CHECKS = 0;
-
-SET
-  FOREIGN_KEY_CHECKS = 1;
-
-INSERT INTO
-  laptop (
-    model_name,
-    operating_system,
-    color,
-    screen_size_inch,
-    processor_brand,
-    core_count,
-    hard_drive_size,
-    ram_size
-  )
-VALUES
-  (
-    'NT350XCR-AD5WS',
-    'Freedos',
-    'White',
-    15.6,
-    'Intel',
-    4,
-    256,
-    8
-  );
